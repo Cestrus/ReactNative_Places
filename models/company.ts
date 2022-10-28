@@ -19,7 +19,6 @@ class Company {
   title: string;
 
   constructor(
-    id: number,
     image: string,
     address: string,
     city: string,
@@ -31,7 +30,7 @@ class Company {
     name: string,
     title: string
   ) {
-    this.id = id;
+    this.id = Date.now() + +Math.random().toFixed(5);
     this.image = image;
     this.address = {
       address,

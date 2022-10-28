@@ -1,14 +1,23 @@
+import React from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import { Provider } from 'react-redux';
 
-export default function App() {
+import { store } from './store/store';
+import PlacesList from './components/PlacesList/PlacesList';
+
+export const App: React.FC = () => {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <Provider store={store}>
+      <View style={styles.container}>
+        <StatusBar style='auto' />
+        <PlacesList />
+      </View>
+    </Provider>
   );
-}
+};
+
+export default App;
 
 const styles = StyleSheet.create({
   container: {

@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import { CompanyData } from '../utils/http';
+import { CompanyData } from '../models/company';
 
 export interface IPlasesState {
   places: CompanyData[];

@@ -1,4 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
+import { CompanyData } from '../models/company';
 
 export interface Hair {
   color: string;
@@ -79,15 +80,6 @@ export interface UserData {
 // =========================================
 
 const URL = 'https://dummyjson.com/users';
-
-export interface CompanyData {
-  id: number;
-  image: string;
-  address: CompanyAddress;
-  department: string;
-  name: string;
-  title: string;
-}
 
 type responseType = {
   users: UserData[];

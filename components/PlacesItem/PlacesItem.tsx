@@ -1,11 +1,15 @@
 import React from 'react';
 import { View, Text, StyleSheet, Pressable, Image } from 'react-native';
 import { GlobalStyles } from '../../styles/globalStyles';
+import Button from '../Button/Button';
 import { IPlacesItemProps } from './PlacesItem.props';
 
 const PlacesItem: React.FC<IPlacesItemProps> = ({ place }) => {
   const pressHandler = (id: number): void => {
     console.log('click', id, place.image);
+  };
+  const pressBtnHandler = (): void => {
+    console.log('press btn');
   };
 
   return (
@@ -15,7 +19,18 @@ const PlacesItem: React.FC<IPlacesItemProps> = ({ place }) => {
           <Image source={{ uri: place.image }} style={styles.image} />
         </View>
         <View style={styles.companyDataContainer}>
-          <Text style={[styles.text, styles.name]}>{place.name}</Text>
+          <View style={styles.titleContainer}>
+            <View style={styles.textContainer}>
+              <Text style={[styles.text, styles.name]}>{place.name}</Text>
+            </View>
+            <Button
+              onPress={pressBtnHandler}
+              icon='cross'
+              iconSize={20}
+              iconColor={GlobalStyles.colors.primary100}
+              style={styles.btnDelete}
+            />
+          </View>
           <View style={styles.adressContainer}>
             <Text style={styles.text}>{place.address.city}</Text>
             <Text style={styles.text}>{place.address.address}</Text>
@@ -48,6 +63,11 @@ const styles = StyleSheet.create({
   companyDataContainer: {
     flex: 3,
   },
+  titleContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginVertical: 10,
+  },
   adressContainer: {
     marginHorizontal: 15,
   },
@@ -55,9 +75,16 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: 'white',
   },
+  textContainer: {
+    flex: 1,
+    justifyContent: 'center',
+  },
   name: {
     textAlign: 'center',
     fontWeight: 'bold',
-    paddingVertical: 5,
+  },
+  btnDelete: {
+    width: 30,
+    marginRight: 10,
   },
 });

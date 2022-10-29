@@ -1,1 +1,3 @@
-export interface IAllPlacesScreenProps {}
+import { AllPlacesNavigationProps } from '../../types/routeTypes';
+
+export interface IAllPlacesScreenProps extends AllPlacesNavigationProps {}

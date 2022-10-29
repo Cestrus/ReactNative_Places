@@ -4,5 +4,6 @@ export const GlobalStyles = {
     primary200: '#141c31',
     primary300: '#121726',
     primary400: '#101523',
+    error100: '#db4545',
   },
 };

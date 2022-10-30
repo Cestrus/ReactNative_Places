@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { useDispatch } from 'react-redux';
 
-import Button from '../../components/Button/Button';
 import ErrorOverlay from '../../components/ErrorOverlay/ErrorOverlay';
 import { ErrorType } from '../../components/ErrorOverlay/ErrorOverlay.prop';
 import LoaderOverlay from '../../components/LoaderOverlay/LoaderOverlay';
@@ -12,6 +11,7 @@ import { setPlaces } from '../../store/placesSlice';
 import { GlobalStyles } from '../../styles/globalStyles';
 import { fetchCompanies } from '../../utils/http';
 import { IAllPlacesScreenProps } from './AllPlacesScreen.props';
+import { Entypo } from '@expo/vector-icons';
 
 const AllPlacesScreen: React.FC<IAllPlacesScreenProps> = ({ navigation }) => {
   const addPlaceHandler = (): void => {
@@ -30,7 +30,7 @@ const AllPlacesScreen: React.FC<IAllPlacesScreenProps> = ({ navigation }) => {
   useEffect(() => {
     navigation.setOptions({
       headerTitle: 'My Favorite Places',
-      headerRight: () => <Button icon='add-to-list' iconColor='white' iconSize={26} onPress={addPlaceHandler} />,
+      headerRight: () => <Entypo name='add-to-list' color='white' size={26} onPress={addPlaceHandler} />,
     });
 
     const fetchData = async (): Promise<void> => {

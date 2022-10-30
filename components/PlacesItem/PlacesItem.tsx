@@ -1,15 +1,16 @@
 import React from 'react';
 import { View, Text, StyleSheet, Pressable, Image } from 'react-native';
+
 import { GlobalStyles } from '../../styles/globalStyles';
 import Button from '../Button/Button';
 import { IPlacesItemProps } from './PlacesItem.props';
 
-const PlacesItem: React.FC<IPlacesItemProps> = ({ place }) => {
+const PlacesItem: React.FC<IPlacesItemProps> = ({ place, onDeletePress, onItemPress }) => {
   const pressHandler = (id: number): void => {
-    console.log('click', id, place.image);
+    onItemPress(id);
   };
-  const pressBtnHandler = (): void => {
-    console.log('press btn');
+  const pressBtnHandler = (id: number): void => {
+    onDeletePress(id);
   };
 
   return (
@@ -24,7 +25,7 @@ const PlacesItem: React.FC<IPlacesItemProps> = ({ place }) => {
               <Text style={[styles.text, styles.name]}>{place.name}</Text>
             </View>
             <Button
-              onPress={pressBtnHandler}
+              onPress={(): void => pressBtnHandler(place.id)}
               icon='cross'
               iconSize={20}
               iconColor={GlobalStyles.colors.primary100}

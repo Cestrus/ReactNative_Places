@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View, StyleSheet } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import Button from '../../components/Button/Button';
 import ErrorOverlay from '../../components/ErrorOverlay/ErrorOverlay';
@@ -9,17 +9,11 @@ import LoaderOverlay from '../../components/LoaderOverlay/LoaderOverlay';
 import PlacesList from '../../components/PlacesList/PlacesList';
 
 import { setPlaces } from '../../store/placesSlice';
-import { RootState } from '../../store/store';
 import { GlobalStyles } from '../../styles/globalStyles';
 import { fetchCompanies } from '../../utils/http';
 import { IAllPlacesScreenProps } from './AllPlacesScreen.props';
 
 const AllPlacesScreen: React.FC<IAllPlacesScreenProps> = ({ navigation }) => {
-  navigation.setOptions({
-    headerTitle: 'My Favorite Places',
-    headerRight: () => <Button icon='add-to-list' iconColor='white' iconSize={26} onPress={addPlaceHandler} />,
-  });
-
   const addPlaceHandler = (): void => {
     navigation.navigate('AddPlace');
   };
@@ -31,11 +25,14 @@ const AllPlacesScreen: React.FC<IAllPlacesScreenProps> = ({ navigation }) => {
 
   const [isLoaded, setIsLoaded] = useState<boolean>(true);
   const [gotError, setGotError] = useState<ErrorType>({ message: '', isError: false });
-
-  const places = useSelector((state: RootState) => state.placesSlice.places);
   const dispatch = useDispatch();
 
   useEffect(() => {
+    navigation.setOptions({
+      headerTitle: 'My Favorite Places',
+      headerRight: () => <Button icon='add-to-list' iconColor='white' iconSize={26} onPress={addPlaceHandler} />,
+    });
+
     const fetchData = async (): Promise<void> => {
       try {
         const companies = await fetchCompanies();
@@ -48,7 +45,6 @@ const AllPlacesScreen: React.FC<IAllPlacesScreenProps> = ({ navigation }) => {
       }
       setIsLoaded(false);
     };
-
     fetchData();
   }, []);
 
@@ -62,7 +58,7 @@ const AllPlacesScreen: React.FC<IAllPlacesScreenProps> = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <PlacesList places={places} />
+      <PlacesList />
     </View>
   );
 };

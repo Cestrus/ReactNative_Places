@@ -10,7 +10,11 @@ const Button: React.FC<IButtonProps> = ({ children, style, onPress, icon, iconCo
     <Pressable onPress={onPress}>
       <View style={[styles.container, style]}>
         {icon && <Entypo name={icon} size={iconSize} color={iconColor} />}
-        {children && <Text style={styles.text}>{children}</Text>}
+        {children && (
+          <View style={styles.textWrap}>
+            <Text style={styles.text}>{children}</Text>
+          </View>
+        )}
       </View>
     </Pressable>
   );
@@ -31,5 +35,10 @@ const styles = StyleSheet.create({
   text: {
     color: 'white',
     fontSize: 16,
+    textAlign: 'center',
+  },
+  textWrap: {
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

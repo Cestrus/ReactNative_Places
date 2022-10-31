@@ -1,6 +1,6 @@
 import type { NativeStackScreenProps, NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { NavigatorScreenParams, CompositeNavigationProp } from '@react-navigation/native';
-import { CompanyData } from '../models/company';
+import { CompanyData } from '../types/companyTypes';
 
 export type StackParamListType = {
   AllPlaces: undefined;
@@ -11,3 +11,4 @@ export type StackParamListType = {
 };
 
 export type AllPlacesNavigationProps = NativeStackScreenProps<StackParamListType, 'AllPlaces'>;
+export type AddPlaceNavigationProps = NativeStackScreenProps<StackParamListType, 'AddPlace'>;

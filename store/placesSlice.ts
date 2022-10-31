@@ -1,15 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import { CompanyData } from '../models/company';
+import { CompanyData } from '../types/companyTypes';
 
 export interface IPlasesState {
   places: CompanyData[];
-  placeDetails: CompanyData | null;
 }
 
 const initialState: IPlasesState = {
   places: [],
-  placeDetails: null,
 };
 
 export const placesSlice = createSlice({
@@ -22,16 +20,16 @@ export const placesSlice = createSlice({
     deletePlace: (state, action: PayloadAction<number>) => {
       state.places = state.places.filter((place) => place.id !== action.payload);
     },
-    getPlace: (state, action: PayloadAction<number>) => {
-      console.log('here');
-
-      // if (state.places) {
-      //   return state.places.filter((place) => place.id === action.payload);
-      // }
+    addNewPlace: (state, action: PayloadAction<CompanyData>) => {
+      state.places = [...state.places, action.payload];
+    },
+    updatePlace: (state, action: PayloadAction<CompanyData>) => {
+      const id = state.places.findIndex((place) => place.id === action.payload.id);
+      state.places.splice(id, 1, action.payload);
     },
   },
 });
 
-export const { setPlaces, deletePlace, getPlace } = placesSlice.actions;
+export const { setPlaces, deletePlace, addNewPlace, updatePlace } = placesSlice.actions;
 
 export default placesSlice.reducer;

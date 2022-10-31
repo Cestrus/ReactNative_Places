@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
-import { CompanyData } from '../models/company';
+import { CompanyData } from '../types/companyTypes';
 
 export interface Hair {
   color: string;

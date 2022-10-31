@@ -4,11 +4,11 @@ import { GlobalStyles } from '../../../styles/globalStyles';
 
 import { IInputProps } from './Input.prop';
 
-const Input: React.FC<IInputProps> = ({ label, style, ...props }) => {
+const Input: React.FC<IInputProps> = ({ label, style, isValid = true, ...props }) => {
   return (
     <View style={[styles.container, style]}>
       <Text style={styles.label}>{label}</Text>
-      <TextInput style={styles.input} {...props} />
+      <TextInput style={isValid ? styles.input : [styles.input, styles.error]} {...props} />
     </View>
   );
 };
@@ -34,5 +34,8 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 16,
     backgroundColor: GlobalStyles.colors.primary200,
+  },
+  error: {
+    borderColor: GlobalStyles.colors.error100,
   },
 });

@@ -13,6 +13,15 @@ const PlacesItem: React.FC<IPlacesItemProps> = ({ place, onDeletePress, onItemPr
     onDeletePress(id);
   };
 
+  const formatString = (str: string): string => {
+    if (str.length <= 25) {
+      return str;
+    }
+    const strArr = str.split('');
+    strArr.length = 25;
+    return strArr.concat(['...']).join('');
+  };
+
   return (
     <Pressable onPress={(): void => pressHandler(place.id)}>
       <View style={styles.container}>
@@ -22,7 +31,7 @@ const PlacesItem: React.FC<IPlacesItemProps> = ({ place, onDeletePress, onItemPr
         <View style={styles.companyDataContainer}>
           <View style={styles.titleContainer}>
             <View style={styles.textContainer}>
-              <Text style={[styles.text, styles.name]}>{place.name}</Text>
+              <Text style={[styles.text, styles.name]}>{formatString(place.name)}</Text>
             </View>
             <Button
               onPress={(): void => pressBtnHandler(place.id)}
@@ -34,7 +43,7 @@ const PlacesItem: React.FC<IPlacesItemProps> = ({ place, onDeletePress, onItemPr
           </View>
           <View style={styles.adressContainer}>
             <Text style={styles.text}>{place.address.city}</Text>
-            <Text style={styles.text}>{place.address.address}</Text>
+            <Text style={styles.text}>{formatString(place.address.address)}</Text>
           </View>
         </View>
       </View>

@@ -10,6 +10,7 @@ import Button from '../Button/Button';
 import { CompanyData } from '../../types/companyTypes';
 import { formFieldValidation } from '../../utils/formValidation';
 import { addNewPlace } from '../../store/placesSlice';
+import { AddPlaceNavigationProps } from '../../types/routeTypes';
 
 type FormFieldValueType = {
   value: string;
@@ -35,7 +36,7 @@ interface IState extends StateKeysType {
 }
 
 const AddForm: React.FC<IAddFormProps> = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<AddPlaceNavigationProps>();
   const dispatch = useDispatch();
 
   const [newPlace, setNewPlace] = useState<IState>({

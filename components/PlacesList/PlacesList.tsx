@@ -1,16 +1,19 @@
 import React from 'react';
+import { useNavigation } from '@react-navigation/native';
 import { FlatList, View, Text, StyleSheet } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { CompanyData } from '../../models/company';
-import { deletePlace, getPlace } from '../../store/placesSlice';
+import { CompanyData } from '../../types/companyTypes';
+import { deletePlace } from '../../store/placesSlice';
 import { RootState } from '../../store/store';
 import { GlobalStyles } from '../../styles/globalStyles';
 import PlacesItem from '../PlacesItem/PlacesItem';
 import { IPlaceListProps } from './PlacesList.props';
+import { PlaceDetailsOverviewNavigationProps } from '../../types/routeTypes';
 
 const PlacesList: React.FC<IPlaceListProps> = () => {
   const dispatch = useDispatch();
+  const navigation = useNavigation<PlaceDetailsOverviewNavigationProps>();
   const places = useSelector((state: RootState) => state.placesSlice.places);
 
   const deletePressHandler = (id: CompanyData['id']): void => {
@@ -18,7 +21,7 @@ const PlacesList: React.FC<IPlaceListProps> = () => {
   };
 
   const itemPressHandler = (id: CompanyData['id']): void => {
-    dispatch(getPlace(id));
+    navigation.navigate('PlaceDetailsOverview', { screen: 'PlaceDetails', params: { placeId: id } });
   };
 
   if (!places || !places.length) {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, Pressable, Image } from 'react-native';
+import { View, Text, StyleSheet, Pressable, Image, StyleProp, ViewStyle } from 'react-native';
 
 import { GlobalStyles } from '../../styles/globalStyles';
 import Button from '../Button/Button';
@@ -23,7 +23,10 @@ const PlacesItem: React.FC<IPlacesItemProps> = ({ place, onDeletePress, onItemPr
   };
 
   return (
-    <Pressable onPress={(): void => pressHandler(place.id)}>
+    <Pressable
+      onPress={(): void => pressHandler(place.id)}
+      style={({ pressed }): StyleProp<ViewStyle> => (pressed ? styles.pressed : null)}
+    >
       <View style={styles.container}>
         <View style={styles.imageContainer}>
           <Image source={{ uri: place.image }} style={styles.image} />
@@ -96,5 +99,9 @@ const styles = StyleSheet.create({
   btnDelete: {
     width: 30,
     marginRight: 10,
+  },
+  pressed: {
+    opacity: 0.75,
+    backgroundColor: GlobalStyles.colors.primary100,
   },
 });

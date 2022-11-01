@@ -1,3 +1,3 @@
-import { AddPlaceNavigationProps } from '../../types/routeTypes';
+import { AddPlaceScreenProps } from '../../types/routeTypes';
 
-export interface IAddPlaceScreenProps extends AddPlaceNavigationProps {}
+export interface IAddPlaceScreenProps extends AddPlaceScreenProps {}

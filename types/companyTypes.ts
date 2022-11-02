@@ -8,3 +8,18 @@ export interface CompanyData {
   name: string;
   title: string;
 }
+
+// {
+//   id,
+//   image,
+//   address: {
+//     address,
+//     city,
+//     postalCode,
+//     state,
+//     coordinates: { lat, lng },
+//   },
+//   department,
+//   name,
+//   title,
+// }

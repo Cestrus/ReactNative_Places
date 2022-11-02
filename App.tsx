@@ -30,13 +30,14 @@ const PlaceDetailsOverview = (): JSX.Element => {
         },
         tabBarInactiveTintColor: GlobalStyles.colors.primary50,
         tabBarActiveTintColor: 'white',
+
         headerLeft: () => (
           <Entypo
             name='chevron-left'
             size={24}
             color='white'
             onPress={(): void => {
-              console.log('click');
+              navigation.navigate('AllPlaces');
             }}
           />
         ),
@@ -48,7 +49,9 @@ const PlaceDetailsOverview = (): JSX.Element => {
         options={{
           title: 'Place Details',
           tabBarLabel: 'DETAILS',
-          tabBarIcon: () => <Entypo name='text-document' />,
+          tabBarIcon: ({ focused }) => (
+            <Entypo name='text-document' size={20} color={focused ? 'white' : GlobalStyles.colors.primary50} />
+          ),
         }}
       />
       <BottomTab.Screen
@@ -57,7 +60,9 @@ const PlaceDetailsOverview = (): JSX.Element => {
         options={{
           title: 'Map Location',
           tabBarLabel: 'LOCATION',
-          tabBarIcon: () => <Entypo name='location-pin' />,
+          tabBarIcon: ({ focused }) => (
+            <Entypo name='location-pin' size={26} color={focused ? 'white' : GlobalStyles.colors.primary50} />
+          ),
         }}
       />
     </BottomTab.Navigator>

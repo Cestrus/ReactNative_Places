@@ -28,6 +28,7 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 16,
     color: GlobalStyles.colors.error100,
+    textAlign: 'center',
   },
   name: {
     fontSize: 18,

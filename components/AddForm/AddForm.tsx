@@ -11,8 +11,9 @@ import { CompanyData } from '../../types/companyTypes';
 import { formFieldValidation } from '../../utils/formValidation';
 import { addNewPlace } from '../../store/placesSlice';
 import { AddPlaceNavigationProps } from '../../types/routeTypes';
+import ImageSourse from './ImageSourse/ImageSourse';
 
-type FormFieldValueType = {
+export type FormFieldValueType = {
   value: string;
   isValid: boolean;
 };
@@ -81,7 +82,11 @@ const AddForm: React.FC<IAddFormProps> = () => {
       isValid: true,
     },
   });
-
+  const [isSwitchOn, setIsSwitchOn] = useState<boolean>(true);
+  const switchState = {
+    isEnable: isSwitchOn,
+    setIsEnable: setIsSwitchOn,
+  };
   const createNewPlace = (): CompanyData => {
     return {
       id: Date.now() + +Math.random().toFixed(5),
@@ -101,41 +106,6 @@ const AddForm: React.FC<IAddFormProps> = () => {
       title: newPlace.title.value.trim(),
     };
   };
-
-  // useEffect(() => {
-  //   if (placeId) {
-  //     const place =
-
-  //     const {
-  //       id,
-  //       image,
-  //       company: {
-  //         department,
-  //         name,
-  //         title,
-  //         address: {
-  //           address,
-  //           city,
-  //           postalCode,
-  //           state,
-  //           coordinates: { lat, lng },
-  //         },
-  //       },
-  //     } = place;
-  //     setNewPlace({
-  //       name,
-  //       title,
-  //       image,
-  //       city,
-  //       state,
-  //       department,
-  //       address,
-  //       postalCode,
-  //       lat,
-  //       lng,
-  //     });
-  //   }
-  // }, [placeId]);
 
   const changeTextHandler = (type: string, text: string): void => {
     const chengedField = { ...newPlace[type] };
@@ -181,12 +151,7 @@ const AddForm: React.FC<IAddFormProps> = () => {
         value={newPlace.title.value}
         isValid={newPlace.title.isValid}
       />
-      <Input
-        label='Image URL'
-        onChangeText={(text): void => changeTextHandler('image', text)}
-        value={newPlace.image.value}
-        isValid={newPlace.image.isValid}
-      />
+      <ImageSourse image={newPlace.image} changeTextHandler={changeTextHandler} switchState={switchState} />
       <Input
         label='City'
         onChangeText={(text): void => changeTextHandler('city', text)}
@@ -287,35 +252,3 @@ const styles = StyleSheet.create({
     borderWidth: 2,
   },
 });
-
-// this.image = image;
-// this.address = {
-//   address,
-//   city,
-//   state,
-//   postalCode,
-//   coordinates: {
-//     lat,
-//     lng,
-//   },
-// };
-// this.department = department;
-// this.name = name;
-// this.title = title;
-
-// const {
-//   id,
-//   image,
-//   company: {
-//     department,
-//     name,
-//     title,
-//     address: {
-//       address,
-//       city,
-//       postalCode,
-//       state,
-//       coordinates: { lat, lng },
-//     },
-//   },
-// } = user;

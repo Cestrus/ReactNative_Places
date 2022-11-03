@@ -113,6 +113,10 @@ const AddForm: React.FC<IAddFormProps> = () => {
     setNewPlace((prev) => ({ ...prev, [type]: chengedField }));
   };
 
+  const setLocationHandler = (): void => {
+    navigation.navigate('Map');
+  };
+
   const cancelHandler = (): void => {
     navigation.goBack();
   };
@@ -120,6 +124,7 @@ const AddForm: React.FC<IAddFormProps> = () => {
   const confirmHandler = (): void => {
     const place: IState = JSON.parse(JSON.stringify(newPlace));
     let isValidForm = true;
+
     for (const key in place) {
       place[key].isValid = formFieldValidation(key, place[key].value);
       if (!place[key].isValid) {
@@ -183,28 +188,14 @@ const AddForm: React.FC<IAddFormProps> = () => {
         value={newPlace.postalCode.value}
         isValid={newPlace.postalCode.isValid}
       />
-      <View style={styles.coordContainer}>
-        <Text style={styles.text}>Coordinates</Text>
-        <View style={styles.wrapper}>
-          <View style={styles.localWrap}>
-            <Input
-              label='lat'
-              keyboardType='number-pad'
-              onChangeText={(text): void => changeTextHandler('lat', text)}
-              value={newPlace.lat.value}
-              isValid={newPlace.lat.isValid}
-            />
-          </View>
-          <View style={styles.localWrap}>
-            <Input
-              label='lng'
-              keyboardType='number-pad'
-              onChangeText={(text): void => changeTextHandler('lng', text)}
-              value={newPlace.lng.value}
-              isValid={newPlace.lng.isValid}
-            />
-          </View>
-        </View>
+      <View style={styles.locationContainer}>
+        <Text style={styles.text}>Location</Text>
+        <Button
+          style={[styles.btn, styles.locationBth, (!newPlace.lat.isValid || !newPlace.lng.isValid) && styles.btnErr]}
+          onPress={setLocationHandler}
+        >
+          Set Location
+        </Button>
       </View>
       <View style={styles.wrapper}>
         <View style={styles.localWrap}>
@@ -226,7 +217,7 @@ export default AddForm;
 
 const styles = StyleSheet.create({
   container: {},
-  coordContainer: {
+  locationContainer: {
     paddingHorizontal: 10,
   },
   text: {
@@ -250,5 +241,13 @@ const styles = StyleSheet.create({
     backgroundColor: GlobalStyles.colors.primary300,
     borderColor: GlobalStyles.colors.primary100,
     borderWidth: 2,
+  },
+  locationBth: {
+    alignSelf: 'center',
+    width: 120,
+    marginTop: 0,
+  },
+  btnErr: {
+    borderColor: GlobalStyles.colors.error100,
   },
 });

@@ -7,11 +7,11 @@ import { IImagePicker } from './imagePicker.prop';
 import { GlobalStyles } from '../../styles/globalStyles';
 
 const ImagePicker: React.FC<IImagePicker> = ({ setImageUri }) => {
-  const [cameraPermissions, pesmissionsResponse] = useCameraPermissions();
+  const [cameraPermissions, permissionsResponseFunc] = useCameraPermissions();
 
   const verifyPermissions = async (): Promise<boolean> => {
     if (cameraPermissions!.status === PermissionStatus.UNDETERMINED) {
-      const response = await pesmissionsResponse();
+      const response = await permissionsResponseFunc();
       return response.granted;
     }
     if (cameraPermissions!.status === PermissionStatus.DENIED) {

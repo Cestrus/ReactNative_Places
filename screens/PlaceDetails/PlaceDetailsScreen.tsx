@@ -62,6 +62,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 40,
   },
   imageContainer: {
+    marginTop: 20,
     alignItems: 'center',
   },
   text: {

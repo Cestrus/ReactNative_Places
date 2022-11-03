@@ -90,6 +90,13 @@ export const App: React.FC = () => {
               options={{ headerShown: false }}
             />
             <Stack.Screen name='AddPlace' component={AddPlaceScreen} />
+            <Stack.Screen
+              name='Map'
+              component={MapScreen}
+              options={{
+                title: 'Map Location',
+              }}
+            />
           </Stack.Navigator>
         </NavigationContainer>
       </Provider>

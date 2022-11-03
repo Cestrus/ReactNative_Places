@@ -9,6 +9,7 @@ export type StackParamListType = {
   AddPlace: {
     placeId?: CompanyData['id'];
   };
+  Map: undefined;
 };
 
 export type BottomTabParamListType = {

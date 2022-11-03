@@ -67,6 +67,8 @@ const styles = StyleSheet.create({
   imageContainer: {
     flex: 1,
     backgroundColor: GlobalStyles.colors.primary100,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 
   image: {

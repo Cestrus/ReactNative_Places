@@ -23,7 +23,6 @@ type StateKeysType = {
 };
 
 interface IState extends StateKeysType {
-  // id?: number;
   name: FormFieldValueType;
   title: FormFieldValueType;
   image: FormFieldValueType;
@@ -87,6 +86,7 @@ const AddForm: React.FC<IAddFormProps> = () => {
     isEnable: isSwitchOn,
     setIsEnable: setIsSwitchOn,
   };
+
   const createNewPlace = (): CompanyData => {
     return {
       id: Date.now() + +Math.random().toFixed(5),

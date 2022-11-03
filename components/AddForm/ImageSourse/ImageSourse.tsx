@@ -17,7 +17,7 @@ const ImageSourse: React.FC<IImageSourseProps> = ({ image, changeTextHandler, sw
           trackColor={{ false: GlobalStyles.colors.primary100, true: GlobalStyles.colors.primary100 }}
           thumbColor={isEnable ? 'white' : GlobalStyles.colors.primary50}
         />
-        <Text style={styles.text}>Input image URL or take image from store</Text>
+        <Text style={[styles.text, !image.isValid && styles.textErr]}>Input image URL or take image from store</Text>
       </View>
       <View style={!isEnable && styles.wrapper}>
         {isEnable ? (
@@ -29,7 +29,7 @@ const ImageSourse: React.FC<IImageSourseProps> = ({ image, changeTextHandler, sw
             style={styles.input}
           />
         ) : (
-          <ImagePicker />
+          <ImagePicker setImageUri={changeTextHandler} />
         )}
       </View>
     </View>
@@ -47,6 +47,9 @@ const styles = StyleSheet.create({
   text: {
     color: 'white',
     paddingLeft: 10,
+  },
+  textErr: {
+    color: GlobalStyles.colors.error100,
   },
   input: {
     marginHorizontal: 0,

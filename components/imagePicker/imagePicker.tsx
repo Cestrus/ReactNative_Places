@@ -1,25 +1,46 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
-import { ImagePickerResult, launchCameraAsync } from 'expo-image-picker';
+import { View, StyleSheet, Alert } from 'react-native';
+import { ImagePickerResult, launchCameraAsync, useCameraPermissions, PermissionStatus } from 'expo-image-picker';
 
 import Button from '../Button/Button';
 import { IImagePicker } from './imagePicker.prop';
 import { GlobalStyles } from '../../styles/globalStyles';
 
-const ImagePicker: React.FC<IImagePicker> = () => {
-  const pressHandler = async (): Promise<ImagePickerResult> => {
+const ImagePicker: React.FC<IImagePicker> = ({ setImageUri }) => {
+  const [cameraPermissions, pesmissionsResponse] = useCameraPermissions();
+
+  const verifyPermissions = async (): Promise<boolean> => {
+    if (cameraPermissions!.status === PermissionStatus.UNDETERMINED) {
+      const response = await pesmissionsResponse();
+      return response.granted;
+    }
+    if (cameraPermissions!.status === PermissionStatus.DENIED) {
+      Alert.alert('Permissions is invalid!', 'You need to grant camera permissions');
+      return false;
+    }
+    return true;
+  };
+
+  const pressHandler = async (): Promise<ImagePickerResult | undefined> => {
+    const hasPermissions = await verifyPermissions();
+
+    if (!hasPermissions) {
+      return;
+    }
+
     const image = await launchCameraAsync({
       aspect: [16, 9],
       allowsEditing: true,
       quality: 0.5,
     });
-    console.log(image);
+
+    if (!image.cancelled) {
+      setImageUri('image', image.uri);
+    }
   };
 
   return (
     <View style={styles.container}>
-      <View></View>
-
       <Button onPress={pressHandler} style={styles.btn}>
         Take Image
       </Button>

@@ -1,21 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { View, StyleSheet, Text, Image, ScrollView } from 'react-native';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import ErrorOverlay from '../../components/ErrorOverlay/ErrorOverlay';
+import { setPlaceDetails } from '../../store/placesSlice';
 
 import { RootState } from '../../store/store';
 import { GlobalStyles } from '../../styles/globalStyles';
-import { CompanyData } from '../../types/companyTypes';
 import { IPlaceDetailsScreenProps } from './PlaceDetailsScreen.prop';
 
 const PlaceDetailsScreen: React.FC<IPlaceDetailsScreenProps> = ({ navigation, route }) => {
   const placeId = route.params?.placeId;
-  const [placeDetails, setPlaceDetails] = useState<CompanyData | undefined>();
-  const places = useSelector((state: RootState) => state.placesSlice.places);
+
+  const dispatch = useDispatch();
+  const placeDetails = useSelector((state: RootState) => state.placesSlice.placeDetails);
 
   useEffect(() => {
-    setPlaceDetails(places.find((place) => place.id === placeId));
-  }, []);
+    if (placeId) dispatch(setPlaceDetails(placeId));
+  }, [placeId]);
 
   const confirmHandler = (): void => {
     navigation.goBack();

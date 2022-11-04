@@ -6,9 +6,7 @@ import { CompanyData } from '../types/companyTypes';
 export type StackParamListType = {
   AllPlaces: undefined;
   PlaceDetailsOverview: NavigatorScreenParams<BottomTabParamListType>;
-  AddPlace: {
-    placeId?: CompanyData['id'];
-  };
+  AddPlace: undefined;
   Map: undefined;
 };
 
@@ -23,6 +21,7 @@ export type BottomTabParamListType = {
 export type AllPlacesScreenProps = NativeStackScreenProps<StackParamListType, 'AllPlaces'>;
 export type AddPlaceScreenProps = NativeStackScreenProps<StackParamListType, 'AddPlace'>;
 export type PlaceDetailsScreenProps = BottomTabScreenProps<BottomTabParamListType>;
+export type MapScreenProps = NativeStackScreenProps<StackParamListType, 'Map'>;
 
 // hook useNavigation
 export type AddPlaceNavigationProps = NativeStackNavigationProp<StackParamListType, 'AddPlace'>;
@@ -30,3 +29,7 @@ export type PlaceDetailsOverviewNavigationProps = CompositeNavigationProp<
   NativeStackNavigationProp<StackParamListType, 'PlaceDetailsOverview'>,
   BottomTabNavigationProp<BottomTabParamListType>
 >;
+// export type MapNavigationProps = CompositeNavigationProp<
+//   NativeStackNavigationProp<StackParamListType, 'Map'>,
+//   BottomTabNavigationProp<BottomTabParamListType>
+// >;

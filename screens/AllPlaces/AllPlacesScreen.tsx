@@ -7,7 +7,7 @@ import { ErrorType } from '../../components/ErrorOverlay/ErrorOverlay.prop';
 import LoaderOverlay from '../../components/LoaderOverlay/LoaderOverlay';
 import PlacesList from '../../components/PlacesList/PlacesList';
 
-import { setPlaces } from '../../store/placesSlice';
+import { clearPlaceDetails, setPlaces } from '../../store/placesSlice';
 import { GlobalStyles } from '../../styles/globalStyles';
 import { fetchCompanies } from '../../utils/http';
 import { IAllPlacesScreenProps } from './AllPlacesScreen.props';
@@ -15,6 +15,7 @@ import { Entypo } from '@expo/vector-icons';
 
 const AllPlacesScreen: React.FC<IAllPlacesScreenProps> = ({ navigation }) => {
   const addPlaceHandler = (): void => {
+    dispatch(clearPlaceDetails());
     navigation.navigate('AddPlace');
   };
 

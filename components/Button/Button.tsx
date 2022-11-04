@@ -34,6 +34,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     flexDirection: 'row',
     justifyContent: 'center',
+    height: 40,
   },
   iconWrap: {
     alignItems: 'center',

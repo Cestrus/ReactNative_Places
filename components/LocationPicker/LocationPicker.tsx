@@ -8,6 +8,8 @@ import Button from '../Button/Button';
 import { GlobalStyles } from '../../styles/globalStyles';
 import { useDispatch } from 'react-redux';
 import { setCoord } from '../../store/placesSlice';
+import { useNavigation } from '@react-navigation/native';
+import { MapNavigationProps } from '../../types/routeTypes';
 
 export type LocationType = {
   lat: number;
@@ -18,6 +20,7 @@ const LocationPicker: React.FC<ILocationPicker> = ({ coord }) => {
   const [location, setLocation] = useState<LocationType | undefined>(coord);
   const [locationPermissions, requestPermissions] = useForegroundPermissions();
   const dispatch = useDispatch();
+  const navigation = useNavigation<MapNavigationProps>();
 
   const verifyPermissions = async (): Promise<boolean> => {
     if (locationPermissions!.status === PermissionStatus.UNDETERMINED) {
@@ -36,6 +39,7 @@ const LocationPicker: React.FC<ILocationPicker> = ({ coord }) => {
       return;
     }
     dispatch(setCoord(location));
+    navigation.goBack();
   };
 
   useEffect(() => {

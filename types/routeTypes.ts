@@ -29,7 +29,4 @@ export type PlaceDetailsOverviewNavigationProps = CompositeNavigationProp<
   NativeStackNavigationProp<StackParamListType, 'PlaceDetailsOverview'>,
   BottomTabNavigationProp<BottomTabParamListType>
 >;
-// export type MapNavigationProps = CompositeNavigationProp<
-//   NativeStackNavigationProp<StackParamListType, 'Map'>,
-//   BottomTabNavigationProp<BottomTabParamListType>
-// >;
+export type MapNavigationProps = NativeStackNavigationProp<StackParamListType, 'Map'>;

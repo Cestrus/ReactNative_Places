@@ -1,5 +1,5 @@
 import type { ViewProps } from 'react-native';
-import { CompanyData } from '../../models/company';
+import { CompanyData } from '../../types/companyTypes';
 
 export interface IPlacesItemProps extends ViewProps {
   place: CompanyData;

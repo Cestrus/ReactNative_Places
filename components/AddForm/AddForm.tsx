@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ScrollView, StyleSheet, View, Text, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { GlobalStyles } from '../../styles/globalStyles';
 import { IAddFormProps } from './AddForm.props';
@@ -12,6 +12,7 @@ import { formFieldValidation } from '../../utils/formValidation';
 import { addNewPlace } from '../../store/placesSlice';
 import { AddPlaceNavigationProps } from '../../types/routeTypes';
 import ImageSourse from './ImageSourse/ImageSourse';
+import { RootState } from '../../store/store';
 
 export type FormFieldValueType = {
   value: string;
@@ -37,7 +38,7 @@ interface IState extends StateKeysType {
 
 const AddForm: React.FC<IAddFormProps> = () => {
   const navigation = useNavigation<AddPlaceNavigationProps>();
-  const dispatch = useDispatch();
+  const coordNewPlace = useSelector((state: RootState) => state.placesSlice.coordNewPlace);
 
   const [newPlace, setNewPlace] = useState<IState>({
     name: {
@@ -86,6 +87,17 @@ const AddForm: React.FC<IAddFormProps> = () => {
     isEnable: isSwitchOn,
     setIsEnable: setIsSwitchOn,
   };
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (coordNewPlace) {
+      const placeTmp: IState = JSON.parse(JSON.stringify(newPlace));
+      placeTmp.lat.value = coordNewPlace.lat.toString();
+      placeTmp.lng.value = coordNewPlace.lng.toString();
+      setNewPlace(placeTmp);
+    }
+  }, [coordNewPlace]);
 
   const createNewPlace = (): CompanyData => {
     return {
